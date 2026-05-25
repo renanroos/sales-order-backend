@@ -22,5 +22,5 @@ PUT http://{localhost}/SalesOrderHeaders(adfac79f-51ee-46ae-9920-8e78aaa4fc24)
 Content-Type: application/json
 
 {
-    modifiedBy: "test"
+    "modifiedBy": "test"
 }
