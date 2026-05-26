@@ -10,10 +10,8 @@
     "outDir": "./dist", // Saída dos arquivos compilados (pode ser ajustado conforme necessário)
     //"baseUrl": "./", // Base para resolução de módulos
     "rootDir": "./", // Diretório raiz do projeto
-    "paths": {  
-      "@/*": [
-        "./srv/*"
-      ]
+    "paths": {
+      "@models/*": ["./@cds-models/*/index.ts"]
     }
   },
   "include": [
