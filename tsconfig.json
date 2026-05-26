@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES2025", // Specify ECMAScript target version (versão do node.js do servidor, no BTP pode ser a mais recente)
+    "module": "node16", // Use o sistema de módulos do Node.js
+    "moduleResolution": "node16", // Resolva módulos usando a lógica do Node.js
+    "strict": true, // Habilite todas as verificações de tipo estritas
+    "strictNullChecks": true, // Habilite verificações estritas de nulidade
+    "noImplicitAny": true, // Impede o uso de 'any' implícito
+    "esModuleInterop": true, // Habilite interoperabilidade entre módulos CommonJS e ES
+    "outDir": "./dist", // Saída dos arquivos compilados (pode ser ajustado conforme necessário)
+    //"baseUrl": "./", // Base para resolução de módulos
+    "rootDir": "./", // Diretório raiz do projeto
+    "paths": {  
+      "@/*": [
+        "./srv/*"
+      ]
+    }
+  },
+  "include": [
+    "srv"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

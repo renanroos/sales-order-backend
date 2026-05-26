@@ -8,6 +8,7 @@
   "devDependencies": {
     "@cap-js/cds-typer": "^0.39.1",
     "@cap-js/sqlite": "^2.4",
+    "@types/axios": "^0.14.4",
     "@types/node": "^25.9.1",
     "git-commit-msg-linter": "^5.0.8",
     "tsx": "^4.22.3",
