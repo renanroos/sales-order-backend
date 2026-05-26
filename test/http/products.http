@@ -1,0 +1,41 @@
+@localhost=localhost:4004/odata/v4/main
+@id=7501a9ee-0142-459d-a6a0-2d5891a70eb4
+
+GET http://{{localhost}}/Products
+Content-Type: application/json  
+
+###
+
+POST http://{{localhost}}/Products
+Content-Type: application/json  
+
+{
+    "id": "{{id}}",
+    "name": "Product 1",
+    "price": 2.99
+}
+
+###
+
+DELETE http://{{localhost}}/Products({{id}})
+Content-Type: application/json
+
+###
+
+PUT http://{{localhost}}/Products({{id}})
+Content-Type: application/json
+
+{
+    "name": "Product 2",
+    "price": 2.90
+}
+
+###
+
+PATCH http://{{localhost}}/Products({{id}})
+Content-Type: application/json
+
+{
+    "name": "Product 3",
+    "price": 3.99
+}
