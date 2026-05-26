@@ -59,5 +59,25 @@ Content-Type: application/json
 
 ###
 
-GET http://{{localhost}}/SalesOrderHeaders?$filter=totalAmount le 200000&$expand=items($expand=product),customer
+GET http://{{localhost}}/SalesOrderHeaders?$filter=totalAmount le 200000&$expand=items($expand=product;$filter=quantity le 30),customer
+Content-Type: application/json
+
+###
+
+GET http://{{localhost}}/SalesOrderHeaders?$select=id,customer&$expand=customer($select=email)
+Content-Type: application/json
+
+###
+
+GET http://{{localhost}}/SalesOrderHeaders/$count
+Content-Type: application/json
+
+###
+
+GET http://{{localhost}}/SalesOrderHeaders?$skip=1&$top=5
+Content-Type: application/json
+
+###
+
+GET http://{{localhost}}/SalesOrderHeaders?$search=3orua&$filter= totalAmount ge 200000
 Content-Type: application/json
