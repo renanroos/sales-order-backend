@@ -38,3 +38,10 @@ Content-Type: application/json
 {
     "firstName": "João"
 }
+
+###
+
+GET http://{{localhost}}/Customers?$filter=not endswith(firstName, '10')
+Content-Type: application/json
+
+###
