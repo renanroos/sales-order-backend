@@ -30,15 +30,15 @@ Authorization: Basic cuka:Inicial@12345
             "id": "f04dc464-8c41-4f02-9bc6-30ea075cdc70",
             "header_id": "{{id}}",
             "product_id": "{{productId2}}",
-            "quantity": 10,
-            "price": 2.99
+            "quantity": 1000,
+            "price": 500
         },
         {
             "id": "85b5901b-9737-47f8-b59d-72b406c0f090",
             "header_id": "{{id}}",
             "product_id": "{{productId3}}",
-            "quantity": 10,
-            "price": 4.99
+            "quantity": 2000,
+            "price": 1000
         }
     ]
 }
