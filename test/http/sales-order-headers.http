@@ -12,11 +12,13 @@ Content-Type: application/json
 
 GET http://{{localhost}}/SalesOrderHeaders?$filter=totalAmount le 2000000
 Content-Type: application/json
+Authorization: Basic joaozinho:Inicial@12345
 
 ###
 
 POST http://{{localhost}}/SalesOrderHeaders
 Content-Type: application/json
+Authorization: Basic cuka:Inicial@12345
 
 {
     # "id": "{{id}}",
