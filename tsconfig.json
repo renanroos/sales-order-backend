@@ -8,7 +8,8 @@
     "noImplicitAny": true, // Impede o uso de 'any' implícito
     "esModuleInterop": true, // Habilite interoperabilidade entre módulos CommonJS e ES
     "outDir": "./dist", // Saída dos arquivos compilados (pode ser ajustado conforme necessário)
-    //"baseUrl": "./", // Base para resolução de módulos
+    "baseUrl": "./", // Base para resolução de módulos
+    "ignoreDeprecations": "6.0",
     "rootDir": "./", // Diretório raiz do projeto
     "paths": {
       "@models/*": ["./@cds-models/*/index.ts"]
