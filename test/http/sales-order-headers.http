@@ -19,19 +19,12 @@ POST http://{{localhost}}/SalesOrderHeaders
 Content-Type: application/json
 
 {
-    "id": "{{id}}",
+    # "id": "{{id}}",
     "customer_id": "{{customerId}}",
     "totalAmount": 35.88,
     "items": [
         {
-            "id": "44828c87-565b-4592-9e4e-ff9f142ceece",
-            "header_id": "{{id}}",
-            "product_id": "{{productId1}}",
-            "quantity": 2,
-            "price": 2.99
-        },
-        {
-            "id": "76fd9d77-6b67-4ed6-b262-b908f50eb8c7",
+            # "id": "76fd9d77-6b67-4ed6-b262-b908f50eb8c7",
             "header_id": "{{id}}",
             "product_id": "{{productId2}}",
             "quantity": 10,
