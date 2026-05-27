@@ -3,11 +3,13 @@
 
 GET http://{{localhost}}/Customers
 Content-Type: application/json  
+Authorization: Basic joaozinho:Inicial@12345
 
 ###
 
 POST http://{{localhost}}/Customers
 Content-Type: application/json  
+Authorization: Basic joaozinho:Inicial@12345
 
 {
     "id": "{{id}}",
@@ -20,11 +22,13 @@ Content-Type: application/json
 
 DELETE http://{{localhost}}/Customers({{id}})
 Content-Type: application/json
+Authorization: Basic joaozinho:Inicial@12345
 
 ###
 
 PUT http://{{localhost}}/Customers({{id}})
 Content-Type: application/json
+Authorization: Basic joaozinho:Inicial@12345
 
 {
     "firstName": "João"
@@ -34,6 +38,7 @@ Content-Type: application/json
 
 PATCH http://{{localhost}}/Customers({{id}})
 Content-Type: application/json
+Authorization: Basic joaozinho:Inicial@12345
 
 {
     "firstName": "João"
@@ -43,13 +48,16 @@ Content-Type: application/json
 
 GET http://{{localhost}}/Customers?$filter=not endswith(firstName, '10')
 Content-Type: application/json
+Authorization: Basic joaozinho:Inicial@12345
 
 ###
 
 GET http://{{localhost}}/Customers?$search=83
 Content-Type: application/json
+Authorization: Basic joaozinho:Inicial@12345
 
 ###
 
 GET http://{{localhost}}/Customers?$orderby=firstName desc, lastName desc
 Content-Type: application/json
+Authorization: Basic joaozinho:Inicial@12345

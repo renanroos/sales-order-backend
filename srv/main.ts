@@ -1,7 +1,20 @@
 import cds, { EventHandler, ResultsHandler, Service } from '@sap/cds';
 import { Customers, SalesOrderItem, SalesOrderItems, Products, SalesOrderHeaders, Product } from '@models/sales';
+import { request } from 'axios';
 
 export default (service: Service) => {
+    service.before('READ', '*', (req) => {
+        if (!req.user.is('read_only_user')) {
+            return req.reject(403, 'Acesso negado');
+        }
+    });
+
+    service.before(['WRITE', 'DELETE'], '*', (req) => {
+        if (!req.user.is('admin')) {
+            return req.reject(403, 'Acesso negado');
+        }
+    });
+
     service.after('READ', 'Customers', (results: Customers) => {
         results.forEach(customer => {
             if (!customer.email?.includes('@')) {
@@ -62,5 +75,6 @@ export default (service: Service) => {
                 foundProduct.stock = (foundProduct.stock as number) - productData.quantity;
                 await cds.update('sales.Products').where({ id: foundProduct.id }).with({ stock: foundProduct.stock });
             }
-    }});
+        }
+    });
 }

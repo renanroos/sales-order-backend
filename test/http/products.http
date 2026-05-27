@@ -19,11 +19,13 @@ Content-Type: application/json
 
 DELETE http://{{localhost}}/Products({{id}})
 Content-Type: application/json
+Authorization: Basic joaozinho:Inicial@12345
 
 ###
 
 PUT http://{{localhost}}/Products({{id}})
 Content-Type: application/json
+Authorization: Basic joaozinho:Inicial@12345
 
 {
     "name": "Product 2",
@@ -34,6 +36,7 @@ Content-Type: application/json
 
 PATCH http://{{localhost}}/Products({{id}})
 Content-Type: application/json
+Authorization: Basic joaozinho:Inicial@12345
 
 {
     "name": "Product 3",

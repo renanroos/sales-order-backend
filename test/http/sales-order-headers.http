@@ -7,6 +7,7 @@
 
 GET http://{{localhost}}/SalesOrderHeaders?$filter=id eq {{id}}&$expand=items
 Content-Type: application/json
+Authorization: Basic joaozinho:Inicial@12345
 
 ###
 
@@ -39,11 +40,13 @@ Authorization: Basic cuka:Inicial@12345
 
 DELETE http://{{localhost}}/SalesOrderHeaders(id={{id}})
 Content-Type: application/json
+Authorization: Basic joaozinho:Inicial@12345
 
 ###
 
 PUT http://{{localhost}}/SalesOrderHeaders({{id}})
 Content-Type: application/json
+Authorization: Basic joaozinho:Inicial@12345
 
 {
     "modifiedBy": "test"
@@ -53,28 +56,34 @@ Content-Type: application/json
 
 GET http://{{localhost}}/SalesOrderHeaders?$filter=totalAmount le 200000&$expand=items($expand=product),customer
 Content-Type: application/json
+Authorization: Basic joaozinho:Inicial@12345
 
 ###
 
 GET http://{{localhost}}/SalesOrderHeaders?$filter=totalAmount le 200000&$expand=items($expand=product;$filter=quantity le 30),customer
 Content-Type: application/json
+Authorization: Basic joaozinho:Inicial@12345
 
 ###
 
 GET http://{{localhost}}/SalesOrderHeaders?$select=id,customer&$expand=customer($select=email)
 Content-Type: application/json
+Authorization: Basic joaozinho:Inicial@12345
 
 ###
 
 GET http://{{localhost}}/SalesOrderHeaders/$count
 Content-Type: application/json
+Authorization: Basic joaozinho:Inicial@12345
 
 ###
 
 GET http://{{localhost}}/SalesOrderHeaders?$skip=1&$top=5
 Content-Type: application/json
+Authorization: Basic joaozinho:Inicial@12345
 
 ###
 
 GET http://{{localhost}}/SalesOrderHeaders?$search=3orua&$filter= totalAmount ge 200000
 Content-Type: application/json
+Authorization: Basic joaozinho:Inicial@12345
