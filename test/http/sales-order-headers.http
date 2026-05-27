@@ -4,6 +4,7 @@
 @productId=7501a9ee-0142-459d-a6a0-2d5891a70eb4
 @productId1=4258787c-13d0-4c01-b56d-09168442adbd
 @productId2=27351419-8154-400e-95c4-6ae3852c28cf
+@productId3=27351426-8105-4eab-8f56-efbd2004ccbd
 
 GET http://{{localhost}}/SalesOrderHeaders?$filter=id eq {{id}}&$expand=items
 Content-Type: application/json
@@ -22,16 +23,22 @@ Content-Type: application/json
 Authorization: Basic cuka:Inicial@12345
 
 {
-    # "id": "{{id}}",
+    "id": "{{id}}",
     "customer_id": "{{customerId}}",
-    "totalAmount": 35.88,
     "items": [
         {
-            # "id": "76fd9d77-6b67-4ed6-b262-b908f50eb8c7",
+            "id": "f04dc464-8c41-4f02-9bc6-30ea075cdc70",
             "header_id": "{{id}}",
             "product_id": "{{productId2}}",
             "quantity": 10,
             "price": 2.99
+        },
+        {
+            "id": "85b5901b-9737-47f8-b59d-72b406c0f090",
+            "header_id": "{{id}}",
+            "product_id": "{{productId3}}",
+            "quantity": 10,
+            "price": 4.99
         }
     ]
 }
@@ -40,7 +47,7 @@ Authorization: Basic cuka:Inicial@12345
 
 DELETE http://{{localhost}}/SalesOrderHeaders(id={{id}})
 Content-Type: application/json
-Authorization: Basic joaozinho:Inicial@12345
+Authorization: Basic cuka:Inicial@12345
 
 ###
 
