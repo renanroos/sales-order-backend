@@ -1,5 +1,5 @@
 import cds, { EventHandler, ResultsHandler, Service } from '@sap/cds';
-import { Customers, SalesOrderItem, SalesOrderItems, Products, SalesOrderHeaders, Product } from '@models/sales';
+import { Customers, SalesOrderItem, SalesOrderItems, Products, SalesOrderHeaders, SalesOrderHeader, Product } from '@models/sales';
 import { customerController } from './factories/controllers/customer';
 import { salesOrderHeaderController } from './factories/controllers/sales-order-header';
 import { FullRequestParams } from './protocols';
@@ -31,31 +31,8 @@ export default (service: Service) => {
         req.data.totalAmount = result.totalAmount;
     });
 
-    service.after('CREATE', 'SalesOrderHeaders', async (results: SalesOrderHeaders, req) => {
-        const headerAsArray = Array.isArray(results) ? results : [results] as SalesOrderHeaders;
-        for (const header of headerAsArray) {
-            const items = header.items as SalesOrderItems;
-            const productsData = items.map((item) => ({
-                id: item.product_id as string,
-                quantity: item.quantity as number
-            }));
-            const productsIds = productsData.map((productData) => productData.id);
-            const productsQuery = SELECT.from('sales.Products').where({ id: productsIds });
-            const products: Products = await cds.run(productsQuery);
-            for (const productData of productsData) {
-                const foundProduct = products.find(product => product.id === productData.id) as Product;
-                foundProduct.stock = (foundProduct.stock as number) - productData.quantity;
-                await cds.update('sales.Products').where({ id: foundProduct.id }).with({ stock: foundProduct.stock });
-            }
-
-            const headerAsString = headerAsArray.map(header => JSON.stringify(header));
-            const userAsString = JSON.stringify(req.user);
-            const log = [{
-                header_id: header.id, 
-                userData: userAsString, 
-                orderData: headerAsString 
-            }];
-            await cds.create('sales.SalesOrderLogs').entries(log);
-        }
+    service.after('CREATE', 'SalesOrderHeaders', async (req) => {
+        const salesOrderHeader = req.data as SalesOrderHeader;
+        await salesOrderHeaderController.afterCreate(salesOrderHeader, req.user);
     });
 }
