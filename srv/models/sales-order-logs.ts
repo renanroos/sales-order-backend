@@ -1,10 +1,3 @@
-//     key id: UUID;
-// header: Association to SalesOrderHeaders;
-// userData: LargeString;
-// orderData: LargeString;
-
-import { CustomerProps } from "./customer";
-
 export type SalesOrderLogProps = {
     id: string;
     headerId: string;
@@ -47,6 +40,6 @@ export class SalesOrderLogModel {
             header_id: this.headerId,
             userData: this.userData,
             orderData: this.orderData
-        }
+        };
     }
 }

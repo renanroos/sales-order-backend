@@ -29,6 +29,6 @@ export class LoggedUserModel {
     }
 
     public toStringfiedObject(): string {
-        return JSON.stringify(this.props)
+        return JSON.stringify(this.props);
     }
 }

@@ -1,8 +1,8 @@
-import cds from "@sap/cds";
+import cds from '@sap/cds';
 
-import { ProductModel, ProductProps } from "../../models/product";
-import { ProductRepository } from "./protocols";
-import { Products } from "@models/sales";
+import { ProductModel, ProductProps } from '../../models/product';
+import { ProductRepository } from './protocols';
+import { Products } from '@models/sales';
 
 export class ProductRepositoryImpl implements ProductRepository {
     public async findByIds(ids: ProductProps['id'][]): Promise<ProductModel[] | null> {
@@ -11,7 +11,7 @@ export class ProductRepositoryImpl implements ProductRepository {
         if (!products) {
             return null;
         }
-        return products.map((product: any) => ProductModel.with({
+        return products.map((product: Products[0]) => ProductModel.with({
             id: product.id as string,
             name: product.name as string,
             price: product.price as number,

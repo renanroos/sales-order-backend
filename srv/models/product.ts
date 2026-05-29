@@ -41,7 +41,7 @@ export class ProductModel {
         if(this.stock < amount) {
             return {
                 hasError: true,
-                error: new Error("Quantidade de produtos insuficiente no estoque")
+                error: new Error('Quantidade de produtos insuficiente no estoque')
             };
         }
         this.stock -= amount;

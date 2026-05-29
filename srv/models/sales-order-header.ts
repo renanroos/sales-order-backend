@@ -1,4 +1,4 @@
-import { SalesOrderItemModel } from "./sales-order-item";
+import { SalesOrderItemModel } from './sales-order-item';
 
 type SalesOrderHeaderProps = {
     id: string;
@@ -130,7 +130,7 @@ export class SalesOrderHeaderModel {
     }
 
     public toStringfiedObject(): string {
-        return JSON.stringify(this.props)
+        return JSON.stringify(this.props);
     };
 
 }

@@ -1,8 +1,8 @@
-import cds, { EventHandler, ResultsHandler, Service } from '@sap/cds';
-import { Customers, SalesOrderItem, SalesOrderItems, Products, SalesOrderHeaders, SalesOrderHeader, Product } from '@models/sales';
+import { Customers, SalesOrderHeader, } from '@models/sales';
+import { FullRequestParams } from './protocols';
+import { Service } from '@sap/cds';
 import { customerController } from './factories/controllers/customer';
 import { salesOrderHeaderController } from './factories/controllers/sales-order-header';
-import { FullRequestParams } from './protocols';
 
 
 export default (service: Service) => {
@@ -23,8 +23,7 @@ export default (service: Service) => {
     });
 
     service.before('CREATE', 'SalesOrderHeaders', async (req) => {
-        const params = req.data;
-        const result = await salesOrderHeaderController.beforeCreate(params);
+        const result = await salesOrderHeaderController.beforeCreate(req.data);
         if (result.hasError) {
             return req.reject(400, result.error?.message as string || 'Erro ao criar ordem de venda');
         }
@@ -35,4 +34,4 @@ export default (service: Service) => {
         const salesOrderHeader = req.data as SalesOrderHeader;
         await salesOrderHeaderController.afterCreate(salesOrderHeader, req.user);
     });
-}
+};
