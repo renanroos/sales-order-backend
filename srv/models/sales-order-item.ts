@@ -20,7 +20,7 @@ type CreationPayloadValidationResult = {
 };
 
 export class SalesOrderItemModel {
-    constructor(private props: SalesOrderItemProps) { };
+    constructor(private props: SalesOrderItemProps) {}
 
     public static create(props: SalesOrderItemPropsWithoutId): SalesOrderItemModel {
         return new SalesOrderItemModel({
@@ -50,7 +50,7 @@ export class SalesOrderItemModel {
     }
 
     public validateCreationPayload(params: CreationPayload): CreationPayloadValidationResult {
-        const product = this.products.find(product => product.id === params.product_id);
+        const product = this.products.find((product) => product.id === params.product_id);
         if (!product) {
             return {
                 hasError: true,

@@ -18,4 +18,3 @@ export class CustomerRepositoryImpl implements CustomerRepository {
         });
     }
 }
-

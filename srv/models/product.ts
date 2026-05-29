@@ -11,7 +11,7 @@ export type SellValidationResult = {
 };
 
 export class ProductModel {
-    constructor(private props: ProductProps) {};
+    constructor(private props: ProductProps) {}
 
     public static with(props: ProductProps) {
         return new ProductModel(props);
@@ -38,7 +38,7 @@ export class ProductModel {
     }
 
     public sell(amount: number): SellValidationResult {
-        if(this.stock < amount) {
+        if (this.stock < amount) {
             return {
                 hasError: true,
                 error: new Error('Quantidade de produtos insuficiente no estoque')

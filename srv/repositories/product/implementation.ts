@@ -1,3 +1,4 @@
+// @ts-ignore: no type declarations for '@sap/cds'
 import cds from '@sap/cds';
 
 import { ProductModel, ProductProps } from '../../models/product';
@@ -11,12 +12,14 @@ export class ProductRepositoryImpl implements ProductRepository {
         if (!products) {
             return null;
         }
-        return products.map((product: Products[0]) => ProductModel.with({
-            id: product.id as string,
-            name: product.name as string,
-            price: product.price as number,
-            stock: product.stock as number
-        }));
+        return products.map((product: Products[0]) =>
+            ProductModel.with({
+                id: product.id as string,
+                name: product.name as string,
+                price: product.price as number,
+                stock: product.stock as number
+            })
+        );
     }
 
     public async updateStock(product: ProductModel): Promise<void> {

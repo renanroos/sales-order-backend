@@ -17,7 +17,7 @@ export class SalesOrderHeaderServiceImpl implements SalesOrderHeaderService {
         private readonly customerRepository: CustomerRepository,
         private readonly productRepository: ProductRepository,
         private readonly salesOrderLogRepository: SalesOrderLogRepository
-    ) { }
+    ) {}
 
     public async beforeCreate(params: SalesOrderHeader): Promise<CreationPayloadValidationResult> {
         const products = await this.getProductsByIds(params);
@@ -48,15 +48,15 @@ export class SalesOrderHeaderServiceImpl implements SalesOrderHeaderService {
     }
 
     public async afterCreate(params: SalesOrderHeader, loggedUser: User): Promise<void> {
-        const headerAsArray = Array.isArray(params) ? params : [params] as SalesOrderHeaders;
+        const headerAsArray = Array.isArray(params) ? params : ([params] as SalesOrderHeaders);
         const logs: SalesOrderLogModel[] = [];
         for (const header of headerAsArray) {
-            const products = await this.getProductsByIds(header) as ProductModel[];
+            const products = (await this.getProductsByIds(header)) as ProductModel[];
             const items = this.getSalesOrderItems(header, products as ProductModel[]);
             const salesOrderHeader = this.getExistingSalesOrderHeader(header, items);
             const productsData = salesOrderHeader.getProductsData();
             for (const product of products) {
-                const foundProduct = productsData.find(productData => productData.id === product.id);
+                const foundProduct = productsData.find((productData) => productData.id === product.id);
                 product.sell(foundProduct?.quantity as number);
                 await this.productRepository.updateStock(product);
             }
@@ -73,12 +73,14 @@ export class SalesOrderHeaderServiceImpl implements SalesOrderHeaderService {
     }
 
     private getSalesOrderItems(params: SalesOrderHeader, products: ProductModel[]): SalesOrderItemModel[] {
-        return params.items?.map(item => SalesOrderItemModel.create({
-            productId: item.product_id as string,
-            price: item.price as number,
-            quantity: item.quantity as number,
-            products
-        })) as SalesOrderItemModel[];
+        return params.items?.map((item) =>
+            SalesOrderItemModel.create({
+                productId: item.product_id as string,
+                price: item.price as number,
+                quantity: item.quantity as number,
+                products
+            })
+        ) as SalesOrderItemModel[];
     }
 
     private getSalesOrderHeader(params: SalesOrderHeader, items: SalesOrderItemModel[]): SalesOrderHeaderModel {

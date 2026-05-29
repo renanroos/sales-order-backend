@@ -9,7 +9,7 @@ type SalesOrderLogPropsWithoutId = Omit<SalesOrderLogProps, 'id'>;
 type SalesOrderLogDbProps = Omit<SalesOrderLogProps, 'headerId'> & { header_id: string };
 
 export class SalesOrderLogModel {
-    constructor(private props: SalesOrderLogProps) { };
+    constructor(private props: SalesOrderLogProps) {}
 
     public static create(props: SalesOrderLogPropsWithoutId): SalesOrderLogModel {
         return new SalesOrderLogModel({
