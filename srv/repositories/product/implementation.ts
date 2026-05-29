@@ -1,7 +1,6 @@
-// @ts-ignore: no type declarations for '@sap/cds'
 import cds from '@sap/cds';
 
-import { ProductModel, ProductProps } from '../../models/product';
+import { ProductModel, ProductProps } from '@/models/product';
 import { ProductRepository } from './protocols';
 import { Products } from '@models/sales';
 
