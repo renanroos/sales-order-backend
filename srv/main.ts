@@ -1,7 +1,9 @@
 import cds, { EventHandler, ResultsHandler, Service } from '@sap/cds';
 import { Customers, SalesOrderItem, SalesOrderItems, Products, SalesOrderHeaders, Product } from '@models/sales';
 import { customerController } from './factories/controllers/customer';
+import { salesOrderHeaderController } from './factories/controllers/sales-order-header';
 import { FullRequestParams } from './protocols';
+
 
 export default (service: Service) => {
     service.before('READ', '*', (req) => {
@@ -22,48 +24,11 @@ export default (service: Service) => {
 
     service.before('CREATE', 'SalesOrderHeaders', async (req) => {
         const params = req.data;
-        const items: SalesOrderItems = params.items;
-        if (!params.customer_id) {
-            return req.reject(400, 'Customer Inválido');
+        const result = await salesOrderHeaderController.beforeCreate(params);
+        if (result.hasError) {
+            return req.reject(400, result.error?.message as string || 'Erro ao criar ordem de venda');
         }
-
-        if (!params.items || params.items.length === 0) {
-            return req.reject(400, 'A ordem de venda deve conter pelo menos um item');
-        }
-
-        const customerQuery = SELECT.one.from('sales.Customers').where({ id: params.customer_id });
-        const customer = await cds.run(customerQuery);
-        if (!customer) {
-            return req.reject(404, 'Customer não encontrado');
-        }
-
-        const productsIds: string[] = params.items.map((item: SalesOrderItem) => item.product_id);
-        const productsQuery = SELECT.from('sales.Products').where({ id: productsIds });
-        const products: Products = await cds.run(productsQuery);
-        // const dbProducts = products.map((product) => product.id);
-        for (const item of items) {
-            const dbProduct = products.find(product => product.id === item.product_id);
-            if (!dbProduct) {
-                return req.reject(404, `Produto com id ${item.product_id} não encontrado`);
-            }
-
-            // if(!productsIds.every(productId  => dbProducts.includes(productId)) ) {
-            //     return req.reject(404, 'Produto não encontrado');
-            // }
-            if (dbProduct.stock === 0) {
-                return req.reject(400, `Produto ${dbProduct.name} sem estoque disponível`);
-            }
-        }
-
-        let totalAmount = 0;
-        items.forEach((item) => {
-            totalAmount += (item.price as number) * (item.quantity as number);
-        });
-        if (totalAmount > 30000) {
-            const discount = totalAmount * (10 / 100);
-            totalAmount = totalAmount - discount;
-        }
-        req.data.totalAmount = totalAmount;
+        req.data.totalAmount = result.totalAmount;
     });
 
     service.after('CREATE', 'SalesOrderHeaders', async (results: SalesOrderHeaders, req) => {
