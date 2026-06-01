@@ -7,6 +7,7 @@ import { Customers, SalesOrderHeader } from '@models/sales';
 import { FullRequestParams } from '@/routes/protocols';
 import { customerController } from '@/factories/controllers/customer';
 import { salesOrderHeaderController } from '@/factories/controllers/sales-order-header';
+import { salesReportController } from '@/factories/controllers/sales-report';
 
 export default (service: Service) => {
     service.before('READ', '*', (req) => {
@@ -37,9 +38,8 @@ export default (service: Service) => {
         console.log(`data: ${JSON.stringify(req.data)}`);
         return true;
     });
-    service.on('teste2', async (req) => {
-        console.log(`params: ${JSON.stringify(req.params)}`);
-        console.log(`data: ${JSON.stringify(req.data)}`);
-        return true;
+    service.on('getSalesReportByDays', async (req) => {
+        const days = req.data?.days || 7;
+        return salesReportController.findByDays(days);
     });
 };
