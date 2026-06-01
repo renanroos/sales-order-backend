@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import '../configs/module-alias';
 
 import { Service } from '@sap/cds';
@@ -13,17 +14,14 @@ export default (service: Service) => {
             return req.reject(403, 'Acesso negado');
         }
     });
-
     service.before(['WRITE', 'DELETE'], '*', (req) => {
         if (!req.user.is('admin')) {
             return req.reject(403, 'Acesso negado');
         }
     });
-
     service.after('READ', 'Customers', (customersList: Customers, request) => {
         (request as unknown as FullRequestParams<Customers>).results = customerController.afterRead(customersList);
     });
-
     service.before('CREATE', 'SalesOrderHeaders', async (req) => {
         const result = await salesOrderHeaderController.beforeCreate(req.data);
         if (result.hasError) {
@@ -31,9 +29,17 @@ export default (service: Service) => {
         }
         req.data.totalAmount = result.totalAmount;
     });
-
     service.after('CREATE', 'SalesOrderHeaders', async (req) => {
-        const salesOrderHeader = req.data as SalesOrderHeader;
-        await salesOrderHeaderController.afterCreate(salesOrderHeader, req.user);
+        await salesOrderHeaderController.afterCreate(req.data as SalesOrderHeader, req.user);
+    });
+    service.on('teste', async (req) => {
+        console.log(`params: ${JSON.stringify(req.params)}`);
+        console.log(`data: ${JSON.stringify(req.data)}`);
+        return true;
+    });
+    service.on('teste2', async (req) => {
+        console.log(`params: ${JSON.stringify(req.params)}`);
+        console.log(`data: ${JSON.stringify(req.data)}`);
+        return true;
     });
 };
