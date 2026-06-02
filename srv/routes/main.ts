@@ -48,4 +48,12 @@ export default (service: Service) => {
         const [{ id: customerId }] = req.params as unknown as { id: string }[]; //Necessário fazer cast do params
         return salesReportController.findByCustomerId(customerId);
     });
+    service.on('teste2', async (req) => {
+        console.log(`params: ${JSON.stringify(req.params)}`);
+        console.log(`data: ${JSON.stringify(req.data)}`);
+    });
+    service.on('bulkCreateSalesOrder', async (req) => {
+        const { user, data } = req;
+        return salesOrderHeaderController.bulkCreate(data.payload, user);
+    });
 };

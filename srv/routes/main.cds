@@ -1,5 +1,5 @@
 using {sales} from '../../db/schema';
-using { db.types.SalesReport } from '../../db/types';
+using { db.types.SalesReport, db.types.BulkCreateSalesOrder } from '../../db/types';
 
 @requires: ['authenticated-user']
 // Entities
@@ -8,6 +8,7 @@ service MainService {
         actions {
             //Bound
             function teste() returns Boolean;
+            action teste2();
         };
 
     entity SalesOrderStatuses as projection on sales.SalesOrderStatuses;
@@ -24,3 +25,6 @@ extend service MainService with {
 }
 
 // Actions
+extend service MainService with {
+    action bulkCreateSalesOrder(payload: array of BulkCreateSalesOrder.Payload) returns BulkCreateSalesOrder.ExpectedResult;
+}
