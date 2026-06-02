@@ -3,9 +3,10 @@ import '../configs/module-alias';
 
 import { Service } from '@sap/cds';
 
-import { Customers, SalesOrderHeader } from '@models/sales';
-import { FullRequestParams } from '@/routes/protocols';
-import { customerController } from '@/factories/controllers/customer';
+// import { Customers, SalesOrderHeader } from '@models/sales';
+import { SalesOrderHeader } from '@models/sales';
+// import { FullRequestParams } from '@/routes/protocols';
+// import { customerController } from '@/factories/controllers/customer';
 import { salesOrderHeaderController } from '@/factories/controllers/sales-order-header';
 import { salesReportController } from '@/factories/controllers/sales-report';
 
@@ -20,9 +21,10 @@ export default (service: Service) => {
             return req.reject(403, 'Acesso negado');
         }
     });
-    service.after('READ', 'Customers', (customersList: Customers, request) => {
-        (request as unknown as FullRequestParams<Customers>).results = customerController.afterRead(customersList);
-    });
+    // service.after('READ', 'Customers', (customersList: Customers, request) => {
+    // eslint-disable-next-line max-len
+    // (request as unknown as FullRequestParams<Customers>).results = customerController.afterRead(customersList);  Tive que comentar pois impacta na function getSalesReportByCustomerId
+    // });
     service.before('CREATE', 'SalesOrderHeaders', async (req) => {
         const result = await salesOrderHeaderController.beforeCreate(req.data);
         if (result.hasError) {
@@ -41,5 +43,9 @@ export default (service: Service) => {
     service.on('getSalesReportByDays', async (req) => {
         const days = req.data?.days || 7;
         return salesReportController.findByDays(days);
+    });
+    service.on('getSalesReportByCustomerId', async (req) => {
+        const [{ id: customerId }] = req.params as unknown as { id: string }[]; //Necessário fazer cast do params
+        return salesReportController.findByCustomerId(customerId);
     });
 };

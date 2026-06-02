@@ -1,6 +1,9 @@
-import type { ExpectedResult } from '../../db/types/sales-report-by-days';
-
-type SalesReportProps = ExpectedResult;
+type SalesReportProps = {
+    salesOrderId: string;
+    salesOrderTotalAmount: number;
+    customerId: string;
+    customerFullName: string;
+};
 
 export class SalesReportModel {
     constructor(private props: SalesReportProps) {}

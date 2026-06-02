@@ -8,4 +8,8 @@ export class SalesReportControllerImpl implements SalesReportController {
     public async findByDays(days: number): Promise<SalesReportByDays[] | null> {
         return this.service.findByDays(days);
     }
+
+    public async findByCustomerId(customerId: string): Promise<SalesReportByDays[] | null> {
+        return this.service.findByCustomerId(customerId);
+    }
 }

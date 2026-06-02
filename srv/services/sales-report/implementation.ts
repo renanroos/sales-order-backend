@@ -1,4 +1,4 @@
-import { ExpectedResult as SalesReportByDays } from '../../../db/types';
+import { ExpectedResult as SalesReportByDays } from '@models/db/types/SalesReportByDays';
 import { SalesReportRepository } from '@/repositories/sales-report/protocols';
 import { SalesReportService } from './protocols';
 
@@ -9,6 +9,14 @@ export class SalesReportServiceImpl implements SalesReportService {
         if (reportData === null) {
             return null;
         }
-        return reportData?.map((r) => r.toObject() as SalesReportByDays);
+        return reportData?.map((r) => r.toObject());
+    }
+
+    public async findByCustomerId(customerId: string): Promise<SalesReportByDays[] | null> {
+        const reportData = await this.repository.findByCustomerId(customerId);
+        if (reportData === null) {
+            return null;
+        }
+        return reportData?.map((r) => r.toObject());
     }
 }
