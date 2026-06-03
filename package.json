@@ -2,6 +2,7 @@
   "name": "sales-order-backend",
   "version": "1.0.0",
   "dependencies": {
+    "@cap-js/hana": "^2",
     "@sap/cds": "^9.9.1",
     "module-alias": "^2.3.4"
   },
@@ -30,5 +31,12 @@
     "dev": "cds-tsx watch",
     "lint": "eslint ./srv"
   },
-  "private": true
+  "private": true,
+  "cds": {
+    "requires": {
+      "[hybrid]": {
+        "db": "hana"
+      }
+    }
+  }
 }

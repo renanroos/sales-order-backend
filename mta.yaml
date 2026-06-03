@@ -36,6 +36,7 @@ modules:
     requires:
       - sales-order-backend-db
       - sales-order-backend-uaa
+      - name: sales-order-backend-db
 
   - name: sales-order-backend-db-deployer
     type: hdb
@@ -47,6 +48,7 @@ modules:
         - node_modules
     requires:
       - sales-order-backend-db
+      - name: sales-order-backend-db
 
 resources:
   - name: sales-order-backend-db
