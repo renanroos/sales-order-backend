@@ -11,6 +11,7 @@
     "outDir": "./dist", // Saída dos arquivos compilados (pode ser ajustado conforme necessário)
     "ignoreDeprecations": "6.0",
     "rootDir": "./", // Diretório raiz do projeto
+    "sourceMap": true,
     "paths": {
       "@models/*": ["./@cds-models/*/index.ts"],
       "@/*": ["./srv/*"]
