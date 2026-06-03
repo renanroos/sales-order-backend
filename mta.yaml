@@ -50,6 +50,24 @@ modules:
       - sales-order-backend-db
       - name: sales-order-backend-db
 
+  - name: sales-order-backend-app-router
+    type: approuter-node.js
+    path: app-router
+    parameters:
+      disk-quota: 256M
+      memory: 256M
+    build-parameters:
+      ignore:
+        - node_modules 
+    requires:
+      - name: sales-order-backend-uaa
+      - name: srv-api
+        group: destinations
+        properties:
+          name: srv-api
+          url: "~{srv-url}"
+          forwardAuthToken: true
+
 resources:
   - name: sales-order-backend-db
     type: com.sap.xs.hdi-container
