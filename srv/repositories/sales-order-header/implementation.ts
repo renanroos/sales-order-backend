@@ -6,7 +6,7 @@ import { SalesOrderHeaderModel } from '@/models/sales-order-header';
 import { SalesOrderItemModel } from '@/models/sales-order-item';
 
 export class SalesOrderHeaderRepositoryImpl implements SalesOrderHeaderRepository {
-    public async bulkCreate(headers: SalesOrderHeaderModel[]): Promise<void> {
+    public async bulkCreateSalesOrder(headers: SalesOrderHeaderModel[]): Promise<void> {
         const headerObjects = headers.map((headers) => headers.toCreationObject());
         await cds.create('sales.SalesOrderHeaders').entries(headerObjects);
     }

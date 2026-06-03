@@ -75,7 +75,7 @@ export class SalesOrderHeaderServiceImpl implements SalesOrderHeaderService {
         await this.salesOrderLogRepository.create(logs);
     }
 
-    public async bulkCreate(
+    public async bulkCreateSalesOrder(
         headers: BulkCreateSalesOrderPayload[],
         loggedUser: User
     ): Promise<CreationPayloadValidationResult> {
@@ -100,7 +100,7 @@ export class SalesOrderHeaderServiceImpl implements SalesOrderHeaderService {
             }
             bulkCreateHeaders.push(header);
         }
-        await this.salesOrderHeaderRepository.bulkCreate(bulkCreateHeaders);
+        await this.salesOrderHeaderRepository.bulkCreateSalesOrder(bulkCreateHeaders);
         await this.afterCreate(headers, loggedUser);
         return this.serializeBulkCreateResult(bulkCreateHeaders);
     }
@@ -120,7 +120,7 @@ export class SalesOrderHeaderServiceImpl implements SalesOrderHeaderService {
         if (headerValidationResult.hasError) {
             return headerValidationResult;
         }
-        await this.salesOrderHeaderRepository.bulkCreate([header]);
+        await this.salesOrderHeaderRepository.bulkCreateSalesOrder([header]);
         await this.afterCreate([header.toCreationObject()], loggedUser);
         return this.serializeBulkCreateResult([header]);
     }

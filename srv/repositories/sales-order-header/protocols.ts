@@ -12,6 +12,6 @@ export type CompleteSalesOrderHeader = {
 };
 
 export interface SalesOrderHeaderRepository {
-    bulkCreate(headers: SalesOrderHeaderModel[]): Promise<void>;
+    bulkCreateSalesOrder(headers: SalesOrderHeaderModel[]): Promise<void>;
     findCompleteSalesOrderById(id: string): Promise<SalesOrderHeaderModel | null>;
 }

@@ -54,7 +54,7 @@ export default (service: Service) => {
     });
     service.on('bulkCreateSalesOrder', async (req) => {
         const { user, data } = req;
-        return salesOrderHeaderController.bulkCreate(data.payload, user);
+        return salesOrderHeaderController.bulkCreateSalesOrder(data.payload, user);
     });
     service.on('cloneSalesOrder', async (req) => {
         const [{ id }] = req.params as unknown as { id: string }[];

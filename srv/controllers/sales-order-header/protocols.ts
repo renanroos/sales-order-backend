@@ -11,6 +11,9 @@ export type CreationPayloadValidationResult = {
 export interface SalesOrderHeaderController {
     beforeCreate(params: SalesOrderHeader): Promise<CreationPayloadValidationResult>;
     afterCreate(salesOrderHeader: SalesOrderHeader, loggedUser: User): Promise<void>;
-    bulkCreate(params: BulkCreateSalesOrderPayload[], loggedUser: User): Promise<CreationPayloadValidationResult>;
+    bulkCreateSalesOrder(
+        params: BulkCreateSalesOrderPayload[],
+        loggedUser: User
+    ): Promise<CreationPayloadValidationResult>;
     cloneSalesOrder(id: string, loggedUser: User): Promise<CreationPayloadValidationResult>;
 }
