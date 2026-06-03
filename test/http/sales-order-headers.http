@@ -6,7 +6,7 @@
 @productId2=27351419-8154-400e-95c4-6ae3852c28cf
 @productId3=27351426-8105-4eab-8f56-efbd2004ccbd
 
-GET http://{{localhost}}/SalesOrderHeaders?$filter=id eq {{id}}&$expand=items
+GET http://{{localhost}}/SalesOrderHeaders(61946710-23a7-461a-8220-a102326cde57)?$expand=customer,items($expand=product)
 Content-Type: application/json
 Authorization: Basic joaozinho:Inicial@12345
 
@@ -94,3 +94,38 @@ Authorization: Basic joaozinho:Inicial@12345
 GET http://{{localhost}}/SalesOrderHeaders?$search=3orua&$filter= totalAmount ge 200000
 Content-Type: application/json
 Authorization: Basic joaozinho:Inicial@12345
+
+###
+
+POST http://{{localhost}}/SalesOrderHeaders(a2bca205-689a-465a-8e17-c7489ab17b94)/teste2
+Content-Type: application/json
+Authorization: Basic cuka:Inicial@12345
+
+{
+    "id": "{{id}}",
+    "customer_id": "{{customerId}}",
+    "items": [
+        {
+            "id": "f04dc464-8c41-4f02-9bc6-30ea075cdc70",
+            "header_id": "{{id}}",
+            "product_id": "{{productId2}}",
+            "quantity": 1000,
+            "price": 500
+        },
+        {
+            "id": "85b5901b-9737-47f8-b59d-72b406c0f090",
+            "header_id": "{{id}}",
+            "product_id": "{{productId3}}",
+            "quantity": 2000,
+            "price": 1000
+        }
+    ]
+}
+
+###
+
+POST http://{{localhost}}/SalesOrderHeaders(61946710-23a7-461a-8220-a102326cde57)/cloneSalesOrder
+Content-Type: application/json
+Authorization: Basic cuka:Inicial@12345
+
+{}

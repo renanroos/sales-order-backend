@@ -9,6 +9,7 @@ service MainService {
             //Bound
             function teste() returns Boolean;
             action teste2();
+            action cloneSalesOrder() returns Boolean;
         };
 
     entity SalesOrderStatuses as projection on sales.SalesOrderStatuses;
